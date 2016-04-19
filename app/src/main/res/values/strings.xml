@@ -1,0 +1,115 @@
+<resources>
+    <string name="app_name">MapGeometry</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="strMarkerName">Marker</string>
+    <string name="strAddedTouch">Added on Map</string>
+    <string name="converter">Convert</string>
+    <string name="converter_coord">Convert Coordinates</string>
+    <string name="marcar_ponto">Mark Point</string>
+    <string name="pontos_marcados">Marked Points</string>
+    <string name="conversor_coordenadas">Coordinates Conversor</string>
+    <string name="coordenadas">Current Coordinates:</string>
+    <string name="latitude">Latitude </string>
+    <string name="longitude">Longitude</string>
+    <string name="registro">Record Name</string>
+    <string name="utmLongitude">Universal Tranverse Mercator</string>
+    <string name="leste">Easting</string>
+    <string name="latlon_decimal">Latitude/Longitude (decimal degrees)</string>
+    <string name="quadrante">Zone</string>
+    <string name="salvar_ponto">Save Record</string>
+    <string name="norte">Northing</string>
+    <string name="precisao">Precision</string>
+    <string name="altitude">Altitude</string>
+    <string name="descricao">Description</string>
+    <string name="sem_valor"> </string>
+    <string name="hora">Time:</string>
+    <string name="data">Date:</string>
+    <string name="mapa">Map</string>
+    <string name="apagar">Delete</string>
+    <string name="strRegistro">Record </string>
+    <string name="novo_registro">New Record</string>
+    <string name="coordenadas_convertidas">Coordinates successfully converted</string>
+    <string name="graus">Degrees</string>
+    <string name="minutos">Minutes</string>
+    <string name="segundos">Seconds</string>
+    <string name="grau">deg</string>
+    <string name="min">min</string>
+    <string name="seg">sec</string>
+    <string name="conv_gms">Latitude/Longitude (degrees, minutes and seconds)</string>
+    <string name="pontos">Points</string>
+    <string name="linha">Line</string>
+    <string name="poligono">Polygon</string>
+    <string name="idioma">Language</string>
+    <string name="exportar_kml">Export selected points to Kml format?</string>
+    <string name="apagar_registros">Delete selected records?</string>
+    <string name="sem_pontos">No points on database</string>
+    <string name="latlon_gms">Latitude/Longitude (deg, min , seg)</string>
+    <string name="localizacao_atual">Current Location</string>
+    <string name="cancelar">Cancel</string>
+    <string name="ponto_marcado">Record Saved</string>
+    <string name="valor_longitude">Value of longitude is blank</string>
+    <string name="valor_latitude">Value of latitude is blank</string>
+    <string name="latminmax">Latitude must have values ​​between -90 and 90</string>
+    <string name="lonminmax">Longitude must have values between -180 e 180</string>
+    <string name="quadrante_formato">Sector have invalid values</string>
+    <string name="norte_formato">North coordinate value must be between 0 and 10 000 000</string>
+    <string name="leste_formato">East coordinate value must be between 160 000 and 834 000</string>
+    <string name="minminmax">Valores de minutos devem ser maior ou igual a 0 e menor que 60</string>
+    <string name="segminmax">Valores de segundos devem ser maior ou igual a 0 e menor que 60</string>
+    <string name="strMarcar">Save</string>
+    <string name="nao_loc">It wasn\'t possible get current location</string>
+    <string name="no_camada">The name of the layer can not be blank</string>
+    <string name="arquivo_salvo">File saved successfully </string>
+    <string name="ultima_localizacao">Last location received on: </string>
+    <string name="sim">Yes</string>
+    <string name="nao">No</string>
+    <string name="N">N</string>
+    <string name="S">S</string>
+    <string name="W">W</string>
+    <string name="E">E</string>
+    <string name="documentacao">Help</string>
+    <string name="por">Português</string>
+    <string name="esp">Español</string>
+    <string name="eng">English</string>
+    <string name="escolher">Save on </string>
+    <string name="limpar">Clear</string>
+    <string name="fechar">Close</string>
+    <string name="simbolo_grau">\u00B0</string>
+    <string name="simbolo_min">\'</string>
+    <string name="simbolo_seg">\'\'</string>
+    <string name="num_registros">Number of Records: </string>
+    <string name="gps_status">GPS status:</string>
+    <string name="req_loc">Requesting location</string>
+    <string name="gps_desativado">GPS deactivated</string>
+    <string name="alteracoes_salvas">Alterações Salvas</string>
+    <string name="nenhuma_modificacao">Nenhuma modificação para salvar</string>
+
+    <string name="strLetra">A</string>
+    <string name="strNum">00</string>
+    <string name="strDocMarcar">Save record on database</string>
+    <string name="strDocVer">View details of saved records</string>
+    <string name="strDocMapa">View the records saved on map</string>
+    <string name="strDocRemover">Remove selected records</string>
+    <string name="strDocExportar">Export the selected points to vector layer</string>
+    <string name="strDocSalvar">Save modifications on database</string>
+    <string name="strDocProx">Next record saved</string>
+    <string name="strDocAnt">Previous record saved</string>
+    <string name="strDocConverteUTM">Converter coordenadas a partir de UTM</string>
+    <string name="strDocConvertLL">Converter coordenadas a partir de Latitude/Longitude (graus decimais)</string>
+    <string name="strDocConvertGMS">Converter coordenadas a partir de Latitude/Longitude (graus, minutos e segundos)</string>
+    <string name="file_not_saved">File could not be saved</string>
+
+    <string name="convert_utm">Convert from UTM coordinates</string>
+    <string name="convert_latlon">Convert from Latitude/Longitude</string>
+    <string name="convert_gms">Convert from deg, min, sec</string>
+
+    <string-array name="androidstrings">
+        <item>@string/marcar_ponto</item>
+        <item>@string/pontos_marcados</item>
+        <item>@string/converter</item>
+    </string-array>
+
+    <string name="ad1">ca-app-pub-5640566098042324/4567978777</string>
+    <string name="ad2">ca-app-pub-5467456678044534/4367978547</string>
+</resources>

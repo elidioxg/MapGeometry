@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_map"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/layout_bottom"
+        android:tag="@string/mapa" />
+
+    <RelativeLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/branco">
+
+
+        <RadioGroup
+            android:id="@+id/rg_geometria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_pontos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margem"
+                android:checked="true"
+                android:text="@string/pontos"
+                android:textColor="@color/preto"
+                android:textSize="@dimen/fontePequena" />
+
+            <RadioButton
+                android:id="@+id/rb_linha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margem"
+                android:text="@string/linha"
+                android:textColor="@color/preto"
+                android:textSize="@dimen/fontePequena" />
+
+            <RadioButton
+                android:id="@+id/rb_poligono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margem"
+                android:text="@string/poligono"
+                android:textColor="@color/preto"
+                android:textSize="@dimen/fontePequena" />
+
+            <ImageButton
+                android:id="@+id/ib_pontos"
+                android:layout_width="@dimen/buttons"
+                android:layout_height="@dimen/buttons"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/margem"
+                android:background="@mipmap/ic_view_records" />
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+</RelativeLayout>
