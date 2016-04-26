@@ -19,7 +19,7 @@ import geocodigos.mapgeometry.Database.DatabaseHelper;
 import geocodigos.mapgeometry.Models.PointModel;
 
 
-public class KMLExport extends Activity implements XmlSerializer {
+public class KMLExporter extends Activity implements XmlSerializer {
 
     private OutputStream outputStream;
     private String s;
@@ -28,53 +28,68 @@ public class KMLExport extends Activity implements XmlSerializer {
     private ArrayList<PointModel> campos;
 
     Context context;
-    public KMLExport(Context context){
+    public KMLExporter(Context context){
         this.context=context;
     }
 
-    private ArrayList<PointModel> pontos() {
+    /**
+     *
+     * @return ArrayList with all points in Database
+     */
+    private ArrayList<PointModel> getAllPoints() {
         ArrayList<PointModel> campos = new ArrayList<PointModel>();
 
         database = new DatabaseHelper(context);
         database.getWritableDatabase();
         campos.clear();
-        campos = database.pegarPontos();
+        campos = database.getPoints();
         database.close();
         return campos;
     }
 
-    public String criarCamada(String nome_camada, int tipo) throws
+    /**
+     *
+     * @param layerName Filename of the layer
+     * @param layerType if 0 then Points, 1 line, 2 Polygon
+     * @return
+     * @throws IllegalArgumentException
+     * @throws IllegalStateException
+     * @throws IOException
+     */
+    public String createKmlLayer(String layerName, int layerType) throws
             IllegalArgumentException, IllegalStateException, IOException {
-        campos = pontos();
+        campos = getAllPoints();
         String altitude;
-        XmlSerializer xmlSerializer = Xml.newSerializer();
-        StringWriter writer = new StringWriter();
-        xmlSerializer.setOutput(writer);
+        try {
 
-        xmlSerializer.startDocument("UTF-8", true);
-        xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-        xmlSerializer.startTag("", "kml").attribute("", "xmlns",
-                "http://www.opengis.net/kml/2.2");
-        xmlSerializer.startTag("", "Document");
-        xmlSerializer.startTag("", "name");
-        xmlSerializer.text(nome_camada);
-        xmlSerializer.endTag("", "name");
+            XmlSerializer xmlSerializer = Xml.newSerializer();
+            StringWriter writer = new StringWriter();
+            xmlSerializer.setOutput(writer);
 
-        switch (tipo) {
+            xmlSerializer.startDocument("UTF-8", true);
+            xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+            xmlSerializer.startTag("", "kml").attribute("", "xmlns",
+                    "http://www.opengis.net/kml/2.2");
+            xmlSerializer.startTag("", "Document");
+            xmlSerializer.startTag("", "name");
+            xmlSerializer.text(layerName);
+            xmlSerializer.endTag("", "name");
+
+            switch (layerType) {
                 case 0:
-                    for(int i=0; i<campos.size(); i++) {
-                        if(Integer.parseInt(campos.get(i).getSelecao().trim())==1) {
+                    for (int i = 0; i < campos.size(); i++) {
+                        if (Integer.parseInt(campos.get(i).getSelected().trim()) == 1) {
                             xmlSerializer.startTag("", "Placemark");
                             xmlSerializer.startTag("", "name");
-                            xmlSerializer.text(campos.get(i).getRegistro());
+                            xmlSerializer.text(campos.get(i).getName());
                             xmlSerializer.endTag("", "name");
                             xmlSerializer.startTag("", "description");
-                            xmlSerializer.text(campos.get(i).getDescricao());
+                            xmlSerializer.text(campos.get(i).getDescription());
                             xmlSerializer.endTag("", "description");
                             xmlSerializer.startTag("", "Point");
                             xmlSerializer.startTag("", "coordinates");
                             altitude = campos.get(i).getAltitude();
-                            if(altitude.toString().isEmpty()){
+                            if (altitude.toString().isEmpty()) {
                                 altitude = "0";
                             }
                             xmlSerializer.text(campos.get(i).getlatitude() + " , " +
@@ -87,22 +102,22 @@ public class KMLExport extends Activity implements XmlSerializer {
                     break;
                 case 1:
                     xmlSerializer.startTag("", "Placemark");
-                    xmlSerializer.startTag("","LineString");
-                    xmlSerializer.startTag("","Coordinates");
-                    for(int i=0; i<campos.size();i++){
+                    xmlSerializer.startTag("", "LineString");
+                    xmlSerializer.startTag("", "Coordinates");
+                    for (int i = 0; i < campos.size(); i++) {
                         altitude = campos.get(i).getAltitude();
-                        if(altitude.toString().isEmpty()){
+                        if (altitude.toString().isEmpty()) {
                             altitude = "0";
                         }
-                        if(Integer.parseInt(campos.get(i).getSelecao().trim())==1) {
+                        if (Integer.parseInt(campos.get(i).getSelected().trim()) == 1) {
                             xmlSerializer.text(campos.get(i).getlatitude() + "," +
-                                    campos.get(i).getLongitude() + "," + altitude+
+                                    campos.get(i).getLongitude() + "," + altitude +
                                     System.getProperty("line.separator"));
                         }
                     }
-                    xmlSerializer.endTag("","Coordinates");
-                    xmlSerializer.endTag("","LineString");
-                    xmlSerializer.endTag("","Placemark");
+                    xmlSerializer.endTag("", "Coordinates");
+                    xmlSerializer.endTag("", "LineString");
+                    xmlSerializer.endTag("", "Placemark");
                     break;
                 case 2:
                     xmlSerializer.startTag("", "name");
@@ -114,28 +129,31 @@ public class KMLExport extends Activity implements XmlSerializer {
                     xmlSerializer.endTag("", "extrude");
                     xmlSerializer.startTag("", "LinearRing");
                     xmlSerializer.startTag("", "coordinates");
-                    for(int i=0; i<campos.size(); i++){
+                    for (int i = 0; i < campos.size(); i++) {
                         altitude = campos.get(i).getAltitude();
-                        if(altitude.toString().isEmpty()){
+                        if (altitude.toString().isEmpty()) {
                             altitude = "0";
                         }
-                        if(Integer.parseInt(campos.get(i).getSelecao().trim())==1) {
+                        if (Integer.parseInt(campos.get(i).getSelected().trim()) == 1) {
                             xmlSerializer.text(campos.get(i).getlatitude() + "," +
-                                    campos.get(i).getLongitude() + "," + altitude+
+                                    campos.get(i).getLongitude() + "," + altitude +
                                     System.getProperty("line.separator"));
                         }
                     }
-                    xmlSerializer.endTag("","coordinates");
+                    xmlSerializer.endTag("", "coordinates");
                     xmlSerializer.endTag("", "LinearRing");
                     xmlSerializer.endTag("", "Polygon");
                     break;
                 default:
                     break;
+            }
+            xmlSerializer.endTag("", "Document");
+            xmlSerializer.endTag("", "kml");
+            xmlSerializer.endDocument();
+        } catch (Exception e){
+            e.printStackTrace();
         }
-        xmlSerializer.endTag("", "Document");
-        xmlSerializer.endTag("", "kml");
-        xmlSerializer.endDocument();
-        Log.i("arquivo KML", writer.toString());
+        Log.i("KML File: ", writer.toString());
         return writer.toString();
     }
 
@@ -167,14 +185,12 @@ public class KMLExport extends Activity implements XmlSerializer {
 
     @Override
     public void setOutput(OutputStream outputStream, String s) throws IOException, IllegalArgumentException, IllegalStateException {
-
         this.outputStream = outputStream;
         this.s = s;
     }
 
     @Override
     public void setOutput(Writer writer) throws IOException, IllegalArgumentException, IllegalStateException {
-
         this.writer = writer;
     }
 
