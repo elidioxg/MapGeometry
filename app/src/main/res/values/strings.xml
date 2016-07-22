@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">MapGeometry</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="strMarkerName">Marker</string>
     <string name="strAddedTouch">Added on Map</string>
