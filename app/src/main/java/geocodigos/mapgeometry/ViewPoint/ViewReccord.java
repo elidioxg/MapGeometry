@@ -26,7 +26,7 @@ public class ViewReccord extends Activity {
     private DatabaseHelper database;
     private ArrayList<PointModel> arrayList = new ArrayList<PointModel>();
     private EditText etLatitude, etLongitude, etPrecisao, etAltitude, etSetor,
-        etNorte, etLeste, etDescricao, etHora, etData;
+            etNorte, etLeste, etDescricao, etHora, etData;
     private TextView tvRegistro;
     private ImageButton ibAnterior, ibProximo, ibSalvar;
     private boolean modificado = false;
@@ -131,20 +131,20 @@ public class ViewReccord extends Activity {
             database = new DatabaseHelper(this);
             database.getWritableDatabase();
             arrayList.clear();
-            arrayList = database.pegarPontos();
+            arrayList = database.getPoints();
             pm.setId(arrayList.get(posicao).getId());
-            pm.setRegistro(arrayList.get(posicao).getRegistro());
-            pm.setDescricao(etDescricao.getText().toString());
+            pm.setName(arrayList.get(posicao).getName());
+            pm.setDescription(etDescricao.getText().toString());
             pm.setLatidude(etLatitude.getText().toString().trim());
             pm.setLongitude(etLongitude.getText().toString().trim());
             pm.setData(etData.getText().toString().trim());
-            pm.setHora(etHora.getText().toString().trim());
+            pm.setTime(etHora.getText().toString().trim());
             pm.setAltitude(etAltitude.getText().toString().trim());
-            pm.setPrecisao(etPrecisao.getText().toString().trim());
-            pm.setSetor(etSetor.getText().toString());
-            pm.setNorte(etNorte.getText().toString().trim());
-            pm.setLeste(etLeste.getText().toString().trim());
-            pm.setSelecao(arrayList.get(posicao).getSelecao());
+            pm.setPrecision(etPrecisao.getText().toString().trim());
+            pm.setSector(etSetor.getText().toString());
+            pm.setNorth(etNorte.getText().toString().trim());
+            pm.setEast(etLeste.getText().toString().trim());
+            pm.setSelected(arrayList.get(posicao).getSelected());
             database.updatePoint(pm);
             database.close();
             Toast.makeText(this, R.string.alteracoes_salvas, Toast.LENGTH_SHORT).show();
@@ -157,19 +157,19 @@ public class ViewReccord extends Activity {
         database = new DatabaseHelper(this);
         database.getWritableDatabase();
         arrayList.clear();
-        arrayList = database.pegarPontos();
+        arrayList = database.getPoints();
 
         etLatitude.setText(arrayList.get(Integer.valueOf(posicao)).getlatitude());
         etLongitude.setText(arrayList.get(Integer.valueOf(posicao)).getLongitude());
-        tvRegistro.setText(arrayList.get(Integer.valueOf(posicao)).getRegistro());
-        etDescricao.setText(arrayList.get(Integer.valueOf(posicao)).getDescricao());
+        tvRegistro.setText(arrayList.get(Integer.valueOf(posicao)).getName());
+        etDescricao.setText(arrayList.get(Integer.valueOf(posicao)).getDescription());
         etData.setText(arrayList.get(Integer.valueOf(posicao)).getData());
-        etHora.setText(arrayList.get(Integer.valueOf(posicao)).getHora());
-        etPrecisao.setText(arrayList.get(Integer.valueOf(posicao)).getPrecisao());
+        etHora.setText(arrayList.get(Integer.valueOf(posicao)).getTime());
+        etPrecisao.setText(arrayList.get(Integer.valueOf(posicao)).getPrecision());
         etAltitude.setText(arrayList.get(Integer.valueOf(posicao)).getAltitude());
-        etSetor.setText(arrayList.get(Integer.valueOf(posicao)).getSetor());
-        etNorte.setText(arrayList.get(Integer.valueOf(posicao)).getNorte());
-        etLeste.setText(arrayList.get(Integer.valueOf(posicao)).getLeste());
+        etSetor.setText(arrayList.get(Integer.valueOf(posicao)).getSector());
+        etNorte.setText(arrayList.get(Integer.valueOf(posicao)).getNorth());
+        etLeste.setText(arrayList.get(Integer.valueOf(posicao)).getEast());
 
         database.close();
     }

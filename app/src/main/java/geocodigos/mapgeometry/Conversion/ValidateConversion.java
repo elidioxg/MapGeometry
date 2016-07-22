@@ -5,6 +5,13 @@ public class ValidateConversion {
     private double maxNorth = 10000000;
     private double minEast = 160000;
     private double maxEast = 834000;
+
+    /**
+     * Validate Lat/Lon coordinates
+     * @param latitude
+     * @param longitude
+     * @return
+     */
     public int validate(double latitude, double longitude){
         if (latitude <= -90.0 || latitude >= 90.0) {
             return 1;
@@ -16,6 +23,13 @@ public class ValidateConversion {
         return 0;
     }
 
+    /**
+     * Validate UTM Coordinates
+     * @param setor
+     * @param norte
+     * @param leste
+     * @return
+     */
     public int validate (String setor, String norte, String leste){
         String sec[] = setor.split(" ");
         if(sec.length <2){
@@ -30,8 +44,19 @@ public class ValidateConversion {
         return 0;
     }
 
+    /**
+     * Validate Degrees, minutes and seconds Coordinates
+     * @param latgrau
+     * @param latmin
+     * @param latseg
+     * @param longrau
+     * @param lonmin
+     * @param lonseg
+     * @return
+     */
     public int validate(String latgrau, String latmin, String latseg,
                         String longrau, String lonmin, String lonseg ){
+        //TODO
         if(Double.parseDouble(latgrau) >90 || Double.parseDouble(latgrau) <-90){
             return 1;
         }
